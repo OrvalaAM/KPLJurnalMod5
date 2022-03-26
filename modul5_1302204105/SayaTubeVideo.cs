@@ -15,6 +15,10 @@ namespace modul5_1302204105
         public SayaTubeVideo() { }
         public SayaTubeVideo(string judul)
         {
+            if (judul.Length > 200)
+                throw new Exception("Judul terlalu panjang");
+            if (judul == null)
+                throw new Exception("Judul kosong");
             title = judul;
             Random rnd = new Random();
             id = rnd.Next(10000, 100000);
@@ -22,7 +26,11 @@ namespace modul5_1302204105
         }
         public void IncreasePlayCount(int jumlah)
         {
-            playCount = playCount + jumlah;
+            if (jumlah > 25000000)
+                throw new Exception("Penambahan terlalu banyak");
+            if (jumlah < 0)
+                throw new Exception("Penambahan tidak boleh negatif");
+            playCount = checked(playCount + jumlah);
         }
         public void PrintVideoDetails()
         {

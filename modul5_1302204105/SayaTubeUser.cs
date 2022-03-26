@@ -15,6 +15,10 @@ namespace modul5_1302204105
         public SayaTubeUser() { }
         public SayaTubeUser(string user)
         {
+            if (user.Length > 100)
+                throw new Exception("Username terlalu panjang");
+            if (user == null)
+                throw new Exception("Username kosong");
             Username = user;
             Random rnd = new Random();
             id = rnd.Next(10000, 100000);
@@ -31,12 +35,17 @@ namespace modul5_1302204105
         }
         public void AddVideo(SayaTubeVideo video)
         {
+            if(video == null)
+                throw new Exception("Video kosong");
+            if (video.getPlayCount() > Int32.MaxValue)
+                throw new Exception("Play count melewati batas");
+
             uploadedVideos.Add(video);
         }
         public void PrintAllVideoPlayCount()
         {
             Console.WriteLine("User: " + Username);
-            for(int i = 0; i < uploadedVideos.Count; i++)
+            for(int i = 0; i < 8; i++)
             {
                 Console.WriteLine("Video " + (i+1) + " judul: " + uploadedVideos[i].getTitle());
             }
